@@ -3,9 +3,22 @@ body {
     min-height: 100vh;
 }
 
+.quiz-card {
+    width: 30rem;
+}
+
 .card-container {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.card-footer {
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
 }
