@@ -1,0 +1,42 @@
+let questions = [
+    {
+        'question': 'Frage',
+        'answer_1': 'Frage',
+        'answer_2': 'Frage',
+        'answer_3': 'Frage',
+        'answer_4': 'Frage',
+        'right_answer': '3',
+    },
+    {
+        'question': 'Frage',
+        'answer_1': 'Frage',
+        'answer_2': 'Frage',
+        'answer_3': 'Frage',
+        'answer_4': 'Frage',
+        'right_answer': '3',
+    },
+    {
+        'question': 'Frage',
+        'answer_1': 'Frage',
+        'answer_2': 'Frage',
+        'answer_3': 'Frage',
+        'answer_4': 'Frage',
+        'right_answer': '3',
+    },
+    {
+        'question': 'Frage',
+        'answer_1': 'Frage',
+        'answer_2': 'Frage',
+        'answer_3': 'Frage',
+        'answer_4': 'Frage',
+        'right_answer': '3',
+    },
+    {
+        'question': 'Frage',
+        'answer_1': 'Frage',
+        'answer_2': 'Frage',
+        'answer_3': 'Frage',
+        'answer_4': 'Frage',
+        'right_answer': '3',
+    },
+];
