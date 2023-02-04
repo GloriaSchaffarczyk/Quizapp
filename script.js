@@ -1,7 +1,7 @@
 let questions = [
     {
         'question': 'Aus wie vielen Inseln besteht Japan in etwa?',
-        'answer_1': '4',
+        'answer_1': '1.500',
         'answer_2': '2.900',
         'answer_3': '4.700',
         'answer_4': '6.800',
@@ -56,7 +56,7 @@ let questions = [
         'right_answer': '2',
     },
     {
-        'question': 'Was sieht man in japanischen Innenstädten besonders selten?',
+        'question': 'Was sieht man in japanischen Innenstädten eher selten?',
         'answer_1': 'Betrunkene Männer',
         'answer_2': 'Taxis',
         'answer_3': 'Mülleimer',
@@ -81,15 +81,39 @@ let questions = [
     },
 ];
 
-let currentQuestion = 0;
+let currentQuestion = 0; //wir legen fest, dass das aktuelle JSON, das nullte JSON ist (wir fangen als bei 0 an zu zählen)
 
-function init() {
-    document.getElementById('page').innerHTML = questions.length;
+function init() { // die Funktion wird bei onload aufgerufen und lädt die Fragen und Antworten + die aktuelle Seitenzahl
+    document.getElementById('all-questions').innerHTML = questions.length;
 
     showQuestion();
 }
 
-function showQuestion() {
+function showQuestion() { //die Funktion sorgt dafür, dass die richtige aktuelle Frage und die aktuellen Antworten geladen werden an der Stelle 0
+    let question = questions[currentQuestion];
+    document.getElementById('question_head').innerHTML = question['question']; // wir greifen auf die Frage zu
+    document.getElementById('answer_1').innerHTML = question['answer_1'] //wir greifen auf die Antworten 1-4 zu
+    document.getElementById('answer_2').innerHTML = question['answer_2']
+    document.getElementById('answer_3').innerHTML = question['answer_3']
+    document.getElementById('answer_4').innerHTML = question['answer_4']
+}
+
+/* function showQuestion() {
     let question = questions[currentQuestion];
     document.getElementById('question_head').innerHTML = question['question'];
+    
+    for (let i = 1; i <= 4; i++) {
+        document.getElementById(`answer_${i}`).innerHTML = question[`answer_${i}`];
+    }
+} */
+
+function answer(selection) { // selection ist aus dem HTML Code der Wert der mitgegeben wird. Also z.B. answer('answer_1')
+    let question = questions[currentQuestion]; // wir greifen auf das JSON an der Stelle 0 zu
+    let selectedQuestionNumber = selection.slice(-1); // wir speichern in einer Variable die letzte Zahl der ausgewählten Antwort ab. Also 1 bei answer_1 und so weiter.
+
+    if(selectedQuestionNumber == question['right_answer']) { // wir vergleichen ob der Wert der richtigen Antwort mit der letzten Zahl der gewählten Antwort übereinstimmt.
+        alert('Richtig'); //falls ja
+    } else {
+        alert('falsch'); //falls nein
+    }
 }

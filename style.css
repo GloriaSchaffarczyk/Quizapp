@@ -22,3 +22,8 @@ body {
     align-items: center;
     text-align: center;
 }
+
+.quiz-answer-card:hover {
+    cursor: pointer;
+    background-color: #f3f4ff;
+}
