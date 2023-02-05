@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/question.png" type="image/x-icon">
 </head>
 
 <body onload="init()">
@@ -22,10 +22,14 @@
 
     <div class="card-container">
         <div class="card quiz-card">
-            <img src="img/travel.png" class="card-img-top">
-            <div class="card-body">
+            <img src="img/travel.png" class="card-img-top" id="card-img-top">
+            <div id="game-finished" class="card-body game-finished d-none">
+                <h1>Quiz beendet</h1>
+                <span>Du hast <b id="correct-answers">xx</b> von <b id="sumOfQuestions">xx</b> Fragen richtig beantwortet.</span>
+                <button class="btn btn-info" onclick="startAgain"><b>Nochmal spielen?</b></button>
+            </div>
+            <div class="card-body" id="game-active">
                 <h5 class="card-title mb-3" id="question_head">Frage</h5>
-
                 <div class="card quiz-answer-card mb-3" onclick="answer('answer_1')">
                     <div class="card-body" id="answer_1">
                         Antwort 1
@@ -47,8 +51,8 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted">
-                    <p>Frage <b>1</b> von <b id="all-questions">5</b></p>
-                    <button type="button" class="btn btn-outline-primary">Weiter</button>
+                    <p>Frage <b id="currentPage">1</b> von <b id="all-questions">5</b></p>
+                    <button onclick="nextQuestion()" type="button" class="btn btn-outline-primary" id="next-btn" disabled>Weiter</button>
                 </div>
             </div>
         </div>

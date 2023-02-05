@@ -25,10 +25,10 @@ let questions = [
     },
     {
         'question': 'Welches Stockwerk fehlt in den meisten japanischen Krankenhäusern?',
-        'answer_1': 'Das 13. Stockwerk.',
-        'answer_2': 'Das 4. Stockwerk.',
-        'answer_3': 'Das 8. Stockwerk.',
-        'answer_4': 'Das 21. Stockwerk.',
+        'answer_1': 'Das 13. Stockwerk',
+        'answer_2': 'Das 4. Stockwerk',
+        'answer_3': 'Das 8. Stockwerk',
+        'answer_4': 'Das 21. Stockwerk',
         'right_answer': '2',
     },
     {
@@ -82,6 +82,7 @@ let questions = [
 ];
 
 let currentQuestion = 0; //wir legen fest, dass das aktuelle JSON, das nullte JSON ist (wir fangen als bei 0 an zu zählen)
+let correctAnswers = 0;
 
 function init() { // die Funktion wird bei onload aufgerufen und lädt die Fragen und Antworten + die aktuelle Seitenzahl
     document.getElementById('all-questions').innerHTML = questions.length;
@@ -90,12 +91,23 @@ function init() { // die Funktion wird bei onload aufgerufen und lädt die Frage
 }
 
 function showQuestion() { //die Funktion sorgt dafür, dass die richtige aktuelle Frage und die aktuellen Antworten geladen werden an der Stelle 0
-    let question = questions[currentQuestion];
-    document.getElementById('question_head').innerHTML = question['question']; // wir greifen auf die Frage zu
-    document.getElementById('answer_1').innerHTML = question['answer_1'] //wir greifen auf die Antworten 1-4 zu
-    document.getElementById('answer_2').innerHTML = question['answer_2']
-    document.getElementById('answer_3').innerHTML = question['answer_3']
-    document.getElementById('answer_4').innerHTML = question['answer_4']
+    
+    if (currentQuestion >= questions.length) {
+        document.getElementById('game-finished').classList.remove('d-none');
+        document.getElementById('game-active').classList.add('d-none');
+        document.getElementById('card-img-top').src = "img/win.png";
+        document.getElementById('sumOfQuestions').innerHTML = questions.length;
+        document.getElementById('correct-answers').innerHTML = correctAnswers;
+    } else {
+        let question = questions[currentQuestion];
+
+        document.getElementById('currentPage').innerHTML = currentQuestion + 1;
+        document.getElementById('question_head').innerHTML = question['question']; // wir greifen auf die Frage zu
+        document.getElementById('answer_1').innerHTML = question['answer_1'] //wir greifen auf die Antworten 1-4 zu
+        document.getElementById('answer_2').innerHTML = question['answer_2']
+        document.getElementById('answer_3').innerHTML = question['answer_3']
+        document.getElementById('answer_4').innerHTML = question['answer_4']
+    }
 }
 
 /* function showQuestion() {
@@ -115,8 +127,32 @@ function answer(selection) { // selection ist aus dem HTML Code der Wert der mit
 
     if(selectedQuestionNumber == question['right_answer']) { // wir vergleichen ob der Wert der richtigen Antwort mit der letzten Zahl der gewählten Antwort übereinstimmt.
         document.getElementById(selection).parentNode.classList.add('bg-success');
+        correctAnswers++;
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
     }
+    document.getElementById('next-btn').disabled = false;
 }
+
+function resetAnswerButtons() {
+    document.getElementById('answer_1').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_3').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+    document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
+}
+
+function nextQuestion() {
+    currentQuestion++; // die Variable wird z.B. von 0 auf 1 erhöht
+    document.getElementById('next-btn').disabled = true; // button wird wieder disabled
+    resetAnswerButtons(); // Farbe der Antworten wird zurückgesetzt
+    showQuestion(); // wir rufen wieder die Funktion auf um die neue Frage anzuzeigen
+}
+
+/* function startAgain() {
+    init();
+} */

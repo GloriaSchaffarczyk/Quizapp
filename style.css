@@ -3,6 +3,10 @@ body {
     min-height: 100vh;
 }
 
+.d-none {
+    display: none;
+}
+
 .quiz-card {
     width: 30rem;
 }
@@ -21,6 +25,7 @@ body {
     justify-content: space-between;
     align-items: center;
     text-align: center;
+    gap: 24px;
 }
 
 .quiz-answer-card:hover {
@@ -28,6 +33,29 @@ body {
     background-color: #f3f4ff;
 }
 
-.bg-success, .bg-danger {
+.bg-success,
+.bg-danger {
     color: white;
+}
+
+.game-finished {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-finished button {
+    margin-bottom: 46px;
+}
+
+.navbar>.container,
+.navbar>.container-fluid,
+.navbar>.container-lg,
+.navbar>.container-md,
+.navbar>.container-sm,
+.navbar>.container-xl,
+.navbar>.container-xxl {
+    justify-content: center;
 }
