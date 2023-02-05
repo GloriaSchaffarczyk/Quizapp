@@ -111,9 +111,12 @@ function answer(selection) { // selection ist aus dem HTML Code der Wert der mit
     let question = questions[currentQuestion]; // wir greifen auf das JSON an der Stelle 0 zu
     let selectedQuestionNumber = selection.slice(-1); // wir speichern in einer Variable die letzte Zahl der ausgewählten Antwort ab. Also 1 bei answer_1 und so weiter.
 
+    let idOfRightAnswer = `answer_${question['right_answer']}`; //definieren einen String, der die richtige Antwort anzeigt
+
     if(selectedQuestionNumber == question['right_answer']) { // wir vergleichen ob der Wert der richtigen Antwort mit der letzten Zahl der gewählten Antwort übereinstimmt.
-        alert('Richtig'); //falls ja
+        document.getElementById(selection).parentNode.classList.add('bg-success');
     } else {
-        alert('falsch'); //falls nein
+        document.getElementById(selection).parentNode.classList.add('bg-danger');
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
     }
 }
