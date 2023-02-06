@@ -23,9 +23,14 @@
     <div class="card-container">
         <div class="card quiz-card">
             <img src="img/travel.png" class="card-img-top" id="card-img-top">
+            <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="10"
+                aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar" style="width: 0%" id="progress-bar">0%</div>
+            </div>
             <div id="game-finished" class="card-body game-finished d-none">
                 <h1>Quiz beendet</h1>
-                <span>Du hast <b id="correct-answers">xx</b> von <b id="sumOfQuestions">xx</b> Fragen richtig beantwortet.</span>
+                <span>Du hast <b id="correct-answers">xx</b> von <b id="sumOfQuestions">xx</b> Fragen richtig
+                    beantwortet.</span>
                 <button class="btn btn-info" onclick="startAgain"><b>Nochmal spielen?</b></button>
             </div>
             <div class="card-body" id="game-active">
@@ -52,7 +57,8 @@
                 </div>
                 <div class="card-footer text-muted">
                     <p>Frage <b id="currentPage">1</b> von <b id="all-questions">5</b></p>
-                    <button onclick="nextQuestion()" type="button" class="btn btn-outline-primary" id="next-btn" disabled>Weiter</button>
+                    <button onclick="nextQuestion()" type="button" class="btn btn-outline-primary" id="next-btn"
+                        disabled>Weiter</button>
                 </div>
             </div>
         </div>

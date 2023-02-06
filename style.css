@@ -59,3 +59,7 @@ body {
 .navbar>.container-xxl {
     justify-content: center;
 }
+
+.progress {
+    border-radius: 0%;
+}

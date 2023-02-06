@@ -93,12 +93,19 @@ function init() { // die Funktion wird bei onload aufgerufen und lädt die Frage
 function showQuestion() { //die Funktion sorgt dafür, dass die richtige aktuelle Frage und die aktuellen Antworten geladen werden an der Stelle 0
     
     if (currentQuestion >= questions.length) {
+        // Show end Screen
         document.getElementById('game-finished').classList.remove('d-none');
         document.getElementById('game-active').classList.add('d-none');
         document.getElementById('card-img-top').src = "img/win.png";
         document.getElementById('sumOfQuestions').innerHTML = questions.length;
         document.getElementById('correct-answers').innerHTML = correctAnswers;
     } else {
+        // Show Current Question
+        let percent = (currentQuestion + 1) / questions.length;
+        percent = Math.round(percent * 100); // Zahl wird gerundet
+        document.getElementById('progress-bar').innerHTML = percent + ' %'; // oder `${percent} %`
+        document.getElementById('progress-bar').style.width = `${percent}%`;
+
         let question = questions[currentQuestion];
 
         document.getElementById('currentPage').innerHTML = currentQuestion + 1;
@@ -152,6 +159,8 @@ function nextQuestion() {
     resetAnswerButtons(); // Farbe der Antworten wird zurückgesetzt
     showQuestion(); // wir rufen wieder die Funktion auf um die neue Frage anzuzeigen
 }
+
+
 
 /* function startAgain() {
     init();
