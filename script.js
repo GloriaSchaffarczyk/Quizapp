@@ -82,7 +82,11 @@ let questions = [
 ];
 
 let currentQuestion = 0; //wir legen fest, dass das aktuelle JSON, das nullte JSON ist (wir fangen als bei 0 an zu zählen)
-let correctAnswers = 0;
+// currentQuestion erhöhen wir jedes Mal um 1, wenn wir eine Antwort auswählen bis wir beim Ende angekommen sind
+let correctAnswers = 0; //da zählen wir immer hoch, wenn wir die richtige Antwort ausgewählt haben
+let AUDIO_SUCCESS = new Audio('audio/success.wav');
+let AUDIO_FAIL = new Audio('audio/fail.wav');
+let AUDIO_YAY = new Audio('audio/yay.wav');
 
 function init() { // die Funktion wird bei onload aufgerufen und lädt die Fragen und Antworten + die aktuelle Seitenzahl
     document.getElementById('all-questions').innerHTML = questions.length;
@@ -99,6 +103,7 @@ function showQuestion() { //die Funktion sorgt dafür, dass die richtige aktuell
         document.getElementById('card-img-top').src = "img/win.png";
         document.getElementById('sumOfQuestions').innerHTML = questions.length;
         document.getElementById('correct-answers').innerHTML = correctAnswers;
+        AUDIO_YAY.play();
     } else {
         // Show Current Question
         let percent = (currentQuestion + 1) / questions.length;
@@ -134,10 +139,12 @@ function answer(selection) { // selection ist aus dem HTML Code der Wert der mit
 
     if(selectedQuestionNumber == question['right_answer']) { // wir vergleichen ob der Wert der richtigen Antwort mit der letzten Zahl der gewählten Antwort übereinstimmt.
         document.getElementById(selection).parentNode.classList.add('bg-success');
+        AUDIO_SUCCESS.play();
         correctAnswers++;
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+        AUDIO_FAIL.play();
     }
     document.getElementById('next-btn').disabled = false;
 }
@@ -160,8 +167,13 @@ function nextQuestion() {
     showQuestion(); // wir rufen wieder die Funktion auf um die neue Frage anzuzeigen
 }
 
+function restartGame() {
+    document.getElementById('card-img-top').src = "img/travel.png";
+    document.getElementById('game-active').classList.remove('d-none'); // Fragentemplate wieder anzeigen
+    document.getElementById('game-finished').classList.add('d-none'); //Endscreen ausblenden
 
+    currentQuestion = 0; // das let kommt weg, weil wir die Variable ganz am Anfang bereits definiert haben.
+    correctAnswers = 0; // hier setzen wir die Variablen einfach wieder auf null;
 
-/* function startAgain() {
     init();
-} */
+}
