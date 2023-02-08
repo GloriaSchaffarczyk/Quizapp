@@ -95,15 +95,9 @@ function init() { // die Funktion wird bei onload aufgerufen und lädt die Frage
 }
 
 function showQuestion() { //die Funktion sorgt dafür, dass die richtige aktuelle Frage und die aktuellen Antworten geladen werden an der Stelle 0
-    
+
     if (currentQuestion >= questions.length) {
-        // Show end Screen
-        document.getElementById('game-finished').classList.remove('d-none');
-        document.getElementById('game-active').classList.add('d-none');
-        document.getElementById('card-img-top').src = "img/win.png";
-        document.getElementById('sumOfQuestions').innerHTML = questions.length;
-        document.getElementById('correct-answers').innerHTML = correctAnswers;
-        AUDIO_YAY.play();
+        showEndScreen();
     } else {
         // Show Current Question
         let percent = (currentQuestion + 1) / questions.length;
@@ -137,7 +131,7 @@ function answer(selection) { // selection ist aus dem HTML Code der Wert der mit
 
     let idOfRightAnswer = `answer_${question['right_answer']}`; //definieren einen String, der die richtige Antwort anzeigt
 
-    if(selectedQuestionNumber == question['right_answer']) { // wir vergleichen ob der Wert der richtigen Antwort mit der letzten Zahl der gewählten Antwort übereinstimmt.
+    if (selectedQuestionNumber == question['right_answer']) { // wir vergleichen ob der Wert der richtigen Antwort mit der letzten Zahl der gewählten Antwort übereinstimmt.
         document.getElementById(selection).parentNode.classList.add('bg-success');
         AUDIO_SUCCESS.play();
         correctAnswers++;
@@ -176,4 +170,13 @@ function restartGame() {
     correctAnswers = 0; // hier setzen wir die Variablen einfach wieder auf null;
 
     init();
+}
+
+function showEndScreen() {
+    document.getElementById('game-finished').classList.remove('d-none');
+    document.getElementById('game-active').classList.add('d-none');
+    document.getElementById('card-img-top').src = "img/win.png";
+    document.getElementById('sumOfQuestions').innerHTML = questions.length;
+    document.getElementById('correct-answers').innerHTML = correctAnswers;
+    AUDIO_YAY.play();
 }
