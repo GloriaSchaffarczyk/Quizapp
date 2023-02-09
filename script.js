@@ -96,24 +96,16 @@ function init() { // die Funktion wird bei onload aufgerufen und lädt die Frage
 
 function showQuestion() { //die Funktion sorgt dafür, dass die richtige aktuelle Frage und die aktuellen Antworten geladen werden an der Stelle 0
 
-    if (currentQuestion >= questions.length) {
+    if (gameIsOver()) {
         showEndScreen();
     } else {
-        // Show Current Question
-        let percent = (currentQuestion + 1) / questions.length;
-        percent = Math.round(percent * 100); // Zahl wird gerundet
-        document.getElementById('progress-bar').innerHTML = percent + ' %'; // oder `${percent} %`
-        document.getElementById('progress-bar').style.width = `${percent}%`;
-
-        let question = questions[currentQuestion];
-
-        document.getElementById('currentPage').innerHTML = currentQuestion + 1;
-        document.getElementById('question_head').innerHTML = question['question']; // wir greifen auf die Frage zu
-        document.getElementById('answer_1').innerHTML = question['answer_1'] //wir greifen auf die Antworten 1-4 zu
-        document.getElementById('answer_2').innerHTML = question['answer_2']
-        document.getElementById('answer_3').innerHTML = question['answer_3']
-        document.getElementById('answer_4').innerHTML = question['answer_4']
+        updateProgressBar();
+        updateToNextQuestion();
     }
+}
+
+function gameIsOver() {
+    return currentQuestion >= questions.length;
 }
 
 /* function showQuestion() {
@@ -128,10 +120,9 @@ function showQuestion() { //die Funktion sorgt dafür, dass die richtige aktuell
 function answer(selection) { // selection ist aus dem HTML Code der Wert der mitgegeben wird. Also z.B. answer('answer_1')
     let question = questions[currentQuestion]; // wir greifen auf das JSON an der Stelle 0 zu
     let selectedQuestionNumber = selection.slice(-1); // wir speichern in einer Variable die letzte Zahl der ausgewählten Antwort ab. Also 1 bei answer_1 und so weiter.
-
     let idOfRightAnswer = `answer_${question['right_answer']}`; //definieren einen String, der die richtige Antwort anzeigt
 
-    if (selectedQuestionNumber == question['right_answer']) { // wir vergleichen ob der Wert der richtigen Antwort mit der letzten Zahl der gewählten Antwort übereinstimmt.
+    if (rightAnswerSelected(selectedQuestionNumber)) { // wir vergleichen ob der Wert der richtigen Antwort mit der letzten Zahl der gewählten Antwort übereinstimmt.
         document.getElementById(selection).parentNode.classList.add('bg-success');
         AUDIO_SUCCESS.play();
         correctAnswers++;
@@ -141,6 +132,10 @@ function answer(selection) { // selection ist aus dem HTML Code der Wert der mit
         AUDIO_FAIL.play();
     }
     document.getElementById('next-btn').disabled = false;
+}
+
+function rightAnswerSelected(selectedQuestionNumber) {
+    return selectedQuestionNumber == question['right_answer'];
 }
 
 function resetAnswerButtons() {
@@ -179,4 +174,23 @@ function showEndScreen() {
     document.getElementById('sumOfQuestions').innerHTML = questions.length;
     document.getElementById('correct-answers').innerHTML = correctAnswers;
     AUDIO_YAY.play();
+}
+
+function updateProgressBar() {
+    let percent = (currentQuestion + 1) / questions.length;
+    percent = Math.round(percent * 100); // Zahl wird gerundet
+    document.getElementById('progress-bar').innerHTML = percent + ' %'; // oder `${percent} %`
+    document.getElementById('progress-bar').style.width = `${percent}%`;
+}
+
+function updateToNextQuestion() {
+            // Show Current Question
+            let question = questions[currentQuestion];
+    
+            document.getElementById('currentPage').innerHTML = currentQuestion + 1;
+            document.getElementById('question_head').innerHTML = question['question']; // wir greifen auf die Frage zu
+            document.getElementById('answer_1').innerHTML = question['answer_1'] //wir greifen auf die Antworten 1-4 zu
+            document.getElementById('answer_2').innerHTML = question['answer_2']
+            document.getElementById('answer_3').innerHTML = question['answer_3']
+            document.getElementById('answer_4').innerHTML = question['answer_4']
 }
