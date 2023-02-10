@@ -135,7 +135,7 @@ function answer(selection) { // selection ist aus dem HTML Code der Wert der mit
 }
 
 function rightAnswerSelected(selectedQuestionNumber) {
-    return selectedQuestionNumber == question['right_answer'];
+    return selectedQuestionNumber == questions['right_answer'];
 }
 
 function resetAnswerButtons() {
